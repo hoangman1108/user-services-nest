@@ -1,12 +1,10 @@
 import { Controller, Inject } from '@nestjs/common';
-import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { User } from './user.models';
-import { Model, Connection } from 'mongoose'
 import { IUsersService } from './usersService.interface';
 import { PinoLogger } from 'nestjs-pino';
 import { GrpcMethod } from '@nestjs/microservices';
 import { UserDto } from './user.dto';
-import { IEmpty, Iid, IUsers } from 'src/commons/common.interface';
+import { Iid, IUsers } from 'src/commons/common.interface';
 @Controller('users')
 export class UsersController {
   constructor(@Inject('UsersService') private readonly service: IUsersService,

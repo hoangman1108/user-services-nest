@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { InjectConnection, InjectModel } from '@nestjs/mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 import { PinoLogger } from 'nestjs-pino';
 import { IUsersService } from './usersService.interface';
 // import { User, UserDocument } from './user.models';
-import { Model, Connection } from 'mongoose';
+import { Model } from 'mongoose';
 import { UserDto } from './user.dto';
 import { Iid, IUsers } from 'src/commons/common.interface';
 import { User } from './user.models';
@@ -32,14 +32,14 @@ export class UsersService implements IUsersService {
       throw new Error('Create user failed');
     })
   }
-  updateUser({ id, data }: { id: String, data: UserDto }): Promise<User> {
+  updateUser({ id, data }: { id: string, data: UserDto }): Promise<User> {
     return this.userCollection.findOneAndUpdate({ _id: id }, data, { new: true }).then((result) => {
       if (result) return result;
       throw new Error('Update user failed');
     })
   }
-  async findUserById(id: Iid): Promise<User> {
-    const result: User = await this.userCollection.findById(id.id);
+  async findUserById(): Promise<User> {
+    const result: User = await this.userCollection.findById('5fc09df7b12786976dc8eae2');
 
     this.logger.info('UsersService#findUserById.result %o', result)
 
